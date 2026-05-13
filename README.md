@@ -23,7 +23,7 @@ MNIST is a classic benchmark of 70,000 grayscale images of handwritten digits (0
 |---|---|---|
 | KNN |98% |0.98 |
 | SVM |99% |0.99 |
-| Decision tree |87% |0.87% | 
+| Decision tree |87% |0.87 | 
 | Logistic regression |92% |0.91 |
 **SVM ON TEST SET** Accuraacy: 98%, F1-score(macro): 0.98 
 
