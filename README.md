@@ -15,42 +15,58 @@ MNIST is a classic benchmark of 70,000 grayscale images of handwritten digits (0
 
 ---
 
-## 🤖 Models Compared
+## 📊 Results
 
-| Model | Notes |
-|---|---|
-| KNN | k=3, parallel jobs |
-| SVM | RBF kernel, C=5, gamma=scale |
-| Decision Tree | Default depth, random_state=42 |
-| Logistic Regression | max_iter=1000 |
+### Validation set (MNIST, 10% holdout)
 
-> **Best performer: SVM** - highest accuracy on both the MNIST test set and hand-drawn digits.
+| Model | Accuracy | F1 Score (macro) |
+|---|---|---|
+| KNN |98% |0.98 |
+| SVM |99% |0.99 |
+| Decision tree |87% |0.87% | 
+| Logistic regression |92% |0.91 |
+**SVM ON TEST SET** Accuraacy: 98%, F1-score(macro): 0.98 
+
+### Hand-Drawn digits (custom PNG)
+
+| Model | Accuracy | F1 Score (macro) |
+|---|---|---|
+| KNN |79% |0.76 |
+| SVM |85% |0.84 |
+| Decision tree |55% |0.50 |
+| Logistic regression |81% |0.79 |
+
+> **Why the drop on hand-drawn digits is expected - and actually valuable.**
+>
+> All models are trained on MNIST, where digits are centered, normalized, and written in a fairly uniform style. My hand-drawn inputs introduce real-world variability: personal handwriting style, stroke thickness, angle, and spacing all differ from the training distribution. This gap is a well-known challenge in applied ML - a model that scores 97% on a clean benchmark can struggle on data it has never seen before.
+>
+> Testing on custom drawings makes this project more honest than a standard MNIST benchmark. It shows where the model generalizes and where it doesn't, which is exactly the kind of analysis that matters outside of Kaggle.
 
 ---
 
 ## Pipeline
 
 ```
-MNIST PNG Dataset (train / test)
+MNIST PNG dataset (train / test)
         ↓
-  Image Loading & Flattening
-  (PIL, NumPy — 28×28 → 784-dim vector)
+  Image loading & flattening
+  (PIL, NumPy - 28×28 → 784-dim vector)
         ↓
-  Train / Validation Split
+  Train / Validation split
   (90% train, 10% val, stratified)
         ↓
-  Model Training
-  (KNN, SVM, Decision Tree, Logistic Regression)
+  Model training
+  (KNN, SVM, Decision tree, Logistic regression)
         ↓
-  Validation Comparison
+  Validation comparison
   (accuracy + classification report)
         ↓
-  MNIST Test Set Evaluation (10k images)
+  MNIST Test set evaluation (10k images)
         ↓
-  Hand-Drawn Digit Preprocessing
+  Hand-Drawn digit preprocessing
   (RGBA → grayscale → invert → center → resize)
         ↓
-  Final Evaluation on Custom Drawings
+  Final evaluation on custom drawings
 ```
 
 ---
@@ -68,7 +84,7 @@ Preprocessing steps:
 
 ---
 
-## How to Run
+## How to run
 
 ### 1. Download the dataset
 
@@ -109,7 +125,7 @@ jupyter notebook Mnist_final.ipynb
 
 ---
 
-## 📁 Project Structure
+## 📁 Project structure
 
 ```
 ├── Mnist_final.ipynb      # Full pipeline: training, comparison, custom digit testing
